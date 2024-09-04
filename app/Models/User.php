@@ -14,6 +14,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable, HasFactory;
 
+    
     protected $fillable = [
         'nom',
         'prenom',
@@ -46,12 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-
+    
     public function hasRole($roles)
     {
-        if (is_array($roles)) {
-            return in_array($this->role->name, $roles);
-        }
-        return $this->role->name === $roles;
+        return $this->role->hasRole($roles);
     }
 }

@@ -27,10 +27,7 @@ class ClientPolicy
 
     public function create(User $user)
     {
-        if (!$user->hasRole(['ADMIN', 'BOUTIQUIER'])) {
-            return ResponseHelper::sendForbidden('Vous n\'êtes pas autorisé à créer un client');
-        }
-        return true;
+        return $user->hasRole(['ADMIN', 'BOUTIQUIER']);
     }
 
     public function update(User $user, Client $client)

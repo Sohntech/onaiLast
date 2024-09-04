@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
-use Database\Factories\UserFactory;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,7 +13,24 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(1)->create();
-        User::factory()->count(1)->admin()->create();
+        $roles = Role::pluck('id', 'name');
+
+        User::factory()->create([
+            'role_id' => $roles['ADMIN'],
+            'nom' => 'Admin',
+            'prenom' => 'User',
+            'login' => 'admin11',
+            'password' => bcrypt('Sonatel@2024'),
+        ]);
+
+        User::factory()->create([
+            'role_id' => $roles['CLIENT'],
+            'nom' => 'Client',
+            'prenom' => 'User',
+            'login' => 'client11',
+            'password' => bcrypt('Sonatel@2024'),
+        ]);
     }
 }
+
+

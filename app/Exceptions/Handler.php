@@ -47,14 +47,14 @@ class Handler extends ExceptionHandler
                 );
             }
 
-            // if ($exception instanceof NotFoundHttpException) {
-            //     return $this->sendResponse(
-            //         null,
-            //         StateEnum::ECHEC,
-            //         'La route demandée n\'existe pas',
-            //         404
-            //     );
-            // }
+            if ($exception instanceof NotFoundHttpException) {
+                return $this->sendResponse(
+                    null,
+                    StateEnum::ECHEC,
+                    'La route demandée n\'existe pas',
+                    404
+                );
+            }
 
             if ($exception instanceof MethodNotAllowedHttpException) {
                 return $this->sendResponse(
@@ -78,7 +78,7 @@ class Handler extends ExceptionHandler
             return $this->sendResponse(
                 null,
                 StateEnum::ECHEC,
-                $exception->getMessage(),
+                'Une erreur inattendue est survenue : ' . $exception->getMessage(),
                 500
             );
         }

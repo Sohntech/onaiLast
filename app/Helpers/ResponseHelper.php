@@ -5,7 +5,6 @@ use App\Traits\RestResponseTrait;
 use App\Enums\StateEnum;
 
 class ResponseHelper
-
 {
     use RestResponseTrait;
 

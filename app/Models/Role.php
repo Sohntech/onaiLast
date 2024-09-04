@@ -15,4 +15,12 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function hasRole($roles)
+    {
+        if (is_array($roles)) {
+            return in_array($this->name, $roles);
+        }
+        return $this->name === $roles;
+    }
 }
